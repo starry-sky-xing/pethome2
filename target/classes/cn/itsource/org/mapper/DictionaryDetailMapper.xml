@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.itsource.org.mapper.DictionaryDetailMapper">
+
+    <delete id="delete">
+        DELETE FROM t_systemdictionarydetail WHERE id=#{id}
+    </delete>
+
+    <update id="update" >
+        UPDATE t_systemdictionarydetail SET name=#{name} WHERE id=#{id}
+    </update>
+
+    <!--void add(T t);-->
+    <insert id="add" >
+        INSERT INTO t_systemdictionarydetail(name,types_id) VALUES (#{name},#{types_id})
+    </insert>
+
+    <!--//查所有的条数-->
+    <!--Long count(BaseQuery baseQuery);-->
+    <select id="count" resultType="_long">
+        SELECT count(*) FROM t_systemdictionarydetail WHERE types_id=#{types_id}
+    </select>
+    <!--//分页 高级查询-->
+    <!--List<T> findPage(BaseQuery baseQuery);-->
+   <select id="findPage" resultType="cn.itsource.org.domain.DictionaryDetail">
+       SELECT * FROM t_systemdictionarydetail
+       WHERE types_id=#{types_id}
+       limit #{begin},#{pageSize}
+   </select>
+</mapper>
